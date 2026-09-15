@@ -1,47 +1,63 @@
+import Container from "@/components/Container";
 import { categories, productsByCategory } from "@/lib/products";
 
 export default function Products() {
   return (
-    <div className="mx-auto max-w-6xl px-6 py-16">
-      <h1 className="text-3xl font-semibold text-charcoal">Our Products</h1>
-      <p className="mt-3 max-w-2xl text-charcoal-light">
-        Automotive, industrial, and textile lubricants, plus metal working,
-        rubber process, transformer, white oil, and grease — browse by
-        category below.
-      </p>
+    <div>
+      <Container className="py-16 md:py-20">
+        <h1 className="text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">
+          Our Products
+        </h1>
+        <p className="mt-4 max-w-2xl text-lg leading-relaxed text-charcoal-light/80">
+          Automotive, industrial, and textile lubricants, plus metal
+          working, rubber process, transformer, white oil, and grease —
+          browse by category below.
+        </p>
+      </Container>
 
-      <div className="mt-12 flex flex-col gap-16">
-        {categories.map((category) => {
+      <Container className="flex flex-col gap-16 pb-24 md:gap-20 md:pb-32">
+        {categories.map((category, index) => {
           const items = productsByCategory(category.slug);
           return (
-            <section key={category.slug} id={category.slug}>
-              <h2 className="text-2xl font-semibold text-oil-gold">
-                {category.name}
-              </h2>
+            <section key={category.slug} id={category.slug} className="scroll-mt-24">
+              <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-charcoal/15 pb-4">
+                <span className="font-mono text-sm text-oil-gold">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h2 className="text-xl font-semibold tracking-tight text-charcoal sm:text-2xl">
+                  {category.name}
+                </h2>
+                {items.length > 0 && (
+                  <span className="ml-auto text-sm text-charcoal-light/60">
+                    {items.length} product{items.length === 1 ? "" : "s"}
+                  </span>
+                )}
+              </div>
 
               {items.length === 0 ? (
-                <p className="mt-4 text-sm italic text-charcoal-light/70">
+                <div className="mt-6 border border-dashed border-charcoal/20 px-6 py-8 text-sm text-charcoal-light/70">
                   Product listings for this category are being finalised —
                   check back soon.
-                </p>
+                </div>
               ) : (
-                <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="mt-8 grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
                   {items.map((product) => (
                     <div
                       key={product.slug}
-                      className="flex flex-col rounded-lg border border-charcoal/10 bg-offwhite p-6"
+                      className="flex flex-col border-t-2 border-oil-gold pt-4"
                     >
-                      <h3 className="text-lg font-semibold text-charcoal">
+                      <h3 className="text-lg font-medium text-charcoal">
                         {product.name}
                       </h3>
-                      <p className="mt-2 flex-1 text-sm leading-relaxed text-charcoal-light">
+                      <p className="mt-2 flex-1 text-sm leading-relaxed text-charcoal-light/80">
                         {product.description}
                       </p>
                       <a
                         href="#"
-                        className="mt-4 inline-flex w-fit items-center gap-1 text-sm font-medium text-oil-gold hover:text-rust"
+                        className="mt-4 inline-flex w-fit items-center gap-1.5 text-sm font-medium text-charcoal underline decoration-charcoal/30 underline-offset-4 transition-colors hover:text-oil-gold hover:decoration-oil-gold"
                       >
-                        Download catalogue →
+                        Download catalogue
+                        <span aria-hidden="true">↓</span>
                       </a>
                     </div>
                   ))}
@@ -50,7 +66,7 @@ export default function Products() {
             </section>
           );
         })}
-      </div>
+      </Container>
     </div>
   );
 }

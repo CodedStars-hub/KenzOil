@@ -1,9 +1,11 @@
+import Container from "./Container";
+
 export default function Footer() {
   return (
     <footer className="mt-auto bg-charcoal-light text-offwhite">
-      <div className="mx-auto max-w-6xl px-6 py-8 text-sm">
+      <Container className="py-8 text-sm text-offwhite/70">
         <p>&copy; {new Date().getFullYear()} Kenzoil Lubricants. All rights reserved.</p>
-      </div>
+      </Container>
     </footer>
   );
 }
