@@ -1,5 +1,6 @@
 import Container from "@/components/Container";
 import ContactForm from "@/components/ContactForm";
+import FadeUp from "@/components/motion/FadeUp";
 import { siteInfo } from "@/lib/site";
 
 const infoBlocks = [
@@ -29,27 +30,29 @@ export default function Contact() {
   return (
     <div>
       <Container className="py-16 md:py-20">
-        <h1 className="text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">
-          Contact Us
-        </h1>
-        <p className="mt-4 max-w-2xl text-lg leading-relaxed text-charcoal-light/80">
-          Have a question about our lubricants or need a quote? Send us a
-          message and our team will get back to you.
-        </p>
+        <FadeUp>
+          <h1 className="text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">
+            Contact Us
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-charcoal-light/80">
+            Have a question about our lubricants or need a quote? Send us a
+            message and our team will get back to you.
+          </p>
+        </FadeUp>
       </Container>
 
       <Container className="pb-20 md:pb-28">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-5">
-          <div className="lg:col-span-3">
+          <FadeUp className="lg:col-span-3">
             <h2 className="text-sm font-semibold text-oil-gold">
               Send a message
             </h2>
             <div className="mt-5">
               <ContactForm />
             </div>
-          </div>
+          </FadeUp>
 
-          <div className="lg:col-span-2">
+          <FadeUp delay={0.1} className="lg:col-span-2">
             <h2 className="text-sm font-semibold text-oil-gold">
               Contact information
             </h2>
@@ -70,10 +73,10 @@ export default function Contact() {
                 </div>
               ))}
             </div>
-          </div>
+          </FadeUp>
         </div>
 
-        <div className="mt-16">
+        <FadeUp className="mt-16">
           <h2 className="text-sm font-semibold text-oil-gold">Find Us</h2>
           <div className="mt-5 overflow-hidden rounded-sm border border-charcoal/15">
             <iframe
@@ -88,7 +91,7 @@ export default function Contact() {
               className="block"
             />
           </div>
-        </div>
+        </FadeUp>
       </Container>
     </div>
   );

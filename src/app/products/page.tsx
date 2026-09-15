@@ -1,18 +1,21 @@
 import Container from "@/components/Container";
+import FadeUp from "@/components/motion/FadeUp";
 import { categories, productsByCategory } from "@/lib/products";
 
 export default function Products() {
   return (
     <div>
       <Container className="py-16 md:py-20">
-        <h1 className="text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">
-          Our Products
-        </h1>
-        <p className="mt-4 max-w-2xl text-lg leading-relaxed text-charcoal-light/80">
-          Automotive, industrial, and textile lubricants, plus metal
-          working, rubber process, transformer, white oil, and grease —
-          browse by category below.
-        </p>
+        <FadeUp>
+          <h1 className="text-4xl font-semibold tracking-tight text-charcoal md:text-5xl">
+            Our Products
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-charcoal-light/80">
+            Automotive, industrial, and textile lubricants, plus metal
+            working, rubber process, transformer, white oil, and grease —
+            browse by category below.
+          </p>
+        </FadeUp>
       </Container>
 
       <Container className="flex flex-col gap-16 pb-24 md:gap-20 md:pb-32">
@@ -20,7 +23,7 @@ export default function Products() {
           const items = productsByCategory(category.slug);
           return (
             <section key={category.slug} id={category.slug} className="scroll-mt-24">
-              <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-charcoal/15 pb-4">
+              <FadeUp className="flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-charcoal/15 pb-4">
                 <span className="font-mono text-sm text-oil-gold">
                   {String(index + 1).padStart(2, "0")}
                 </span>
@@ -32,18 +35,19 @@ export default function Products() {
                     {items.length} product{items.length === 1 ? "" : "s"}
                   </span>
                 )}
-              </div>
+              </FadeUp>
 
               {items.length === 0 ? (
-                <div className="mt-6 border border-dashed border-charcoal/20 px-6 py-8 text-sm text-charcoal-light/70">
+                <FadeUp className="mt-6 border border-dashed border-charcoal/20 px-6 py-8 text-sm text-charcoal-light/70">
                   Product listings for this category are being finalised —
                   check back soon.
-                </div>
+                </FadeUp>
               ) : (
                 <div className="mt-8 grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-                  {items.map((product) => (
-                    <div
+                  {items.map((product, productIndex) => (
+                    <FadeUp
                       key={product.slug}
+                      delay={productIndex * 0.05}
                       className="flex flex-col border-t-2 border-oil-gold pt-4"
                     >
                       <h3 className="text-lg font-medium text-charcoal">
@@ -59,7 +63,7 @@ export default function Products() {
                         Download catalogue
                         <span aria-hidden="true">↓</span>
                       </a>
-                    </div>
+                    </FadeUp>
                   ))}
                 </div>
               )}

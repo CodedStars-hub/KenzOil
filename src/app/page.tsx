@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Container from "@/components/Container";
+import FadeUp from "@/components/motion/FadeUp";
+import FadeUpLink from "@/components/motion/FadeUpLink";
 import { categories } from "@/lib/products";
 
 export default function Home() {
@@ -7,7 +9,7 @@ export default function Home() {
     <div>
       <section className="bg-charcoal text-offwhite">
         <Container className="py-24 md:py-32">
-          <div className="max-w-2xl">
+          <FadeUp className="max-w-2xl">
             <h1 className="text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
               Keep Moving, Stay Ahead
             </h1>
@@ -28,26 +30,27 @@ export default function Home() {
                 ISO 9001:2015 Certified
               </span>
             </div>
-          </div>
+          </FadeUp>
         </Container>
       </section>
 
       <section>
         <Container className="py-20 md:py-28">
-          <div className="flex flex-col gap-3 border-b border-charcoal/10 pb-8 sm:flex-row sm:items-end sm:justify-between">
+          <FadeUp className="flex flex-col gap-3 border-b border-charcoal/10 pb-8 sm:flex-row sm:items-end sm:justify-between">
             <h2 className="text-3xl font-semibold tracking-tight text-charcoal md:text-4xl">
               Our Products
             </h2>
             <p className="max-w-sm text-charcoal-light/80">
               Eight categories of lubricants and greases, browsable below.
             </p>
-          </div>
+          </FadeUp>
 
           <div className="mt-8 grid grid-cols-2 gap-px overflow-hidden border border-charcoal/10 bg-charcoal/10 lg:grid-cols-4">
             {categories.map((category, index) => (
-              <Link
+              <FadeUpLink
                 key={category.slug}
                 href={`/products#${category.slug}`}
+                delay={index * 0.05}
                 className="group flex min-h-40 flex-col justify-between bg-offwhite p-6 transition-colors hover:bg-charcoal"
               >
                 <span className="font-mono text-sm text-oil-gold">
@@ -56,7 +59,7 @@ export default function Home() {
                 <span className="text-lg font-medium leading-snug text-charcoal transition-colors group-hover:text-offwhite">
                   {category.name}
                 </span>
-              </Link>
+              </FadeUpLink>
             ))}
           </div>
         </Container>
@@ -65,7 +68,7 @@ export default function Home() {
       <section className="bg-charcoal-light text-offwhite">
         <Container className="py-20 md:py-28">
           <div className="grid grid-cols-1 gap-12 md:grid-cols-[1fr_1.4fr]">
-            <div>
+            <FadeUp>
               <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
                 Why Kenzoil
               </h2>
@@ -74,8 +77,8 @@ export default function Home() {
                 consistent performance across every product we manufacture
                 and supply.
               </p>
-            </div>
-            <div>
+            </FadeUp>
+            <FadeUp delay={0.1}>
               <p className="max-w-xl text-lg leading-relaxed text-offwhite/80">
                 The purpose of Kenzoil Lubes is to honourably serve the needs
                 of our customers by producing premium, world-class
@@ -88,26 +91,28 @@ export default function Home() {
               >
                 Learn more about us
               </Link>
-            </div>
+            </FadeUp>
           </div>
         </Container>
       </section>
 
       <section>
-        <Container className="flex flex-col items-start gap-5 py-20 md:py-28">
-          <h2 className="text-3xl font-semibold tracking-tight text-charcoal md:text-4xl">
-            Get in touch
-          </h2>
-          <p className="max-w-lg text-charcoal-light/80">
-            Have a question about our lubricants or need a quote? Reach out
-            and our team will get back to you.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center rounded-sm bg-oil-gold px-7 py-3 font-medium text-charcoal transition-colors hover:bg-oil-gold-light"
-          >
-            Contact Us
-          </Link>
+        <Container className="py-20 md:py-28">
+          <FadeUp className="flex flex-col items-start gap-5">
+            <h2 className="text-3xl font-semibold tracking-tight text-charcoal md:text-4xl">
+              Get in touch
+            </h2>
+            <p className="max-w-lg text-charcoal-light/80">
+              Have a question about our lubricants or need a quote? Reach out
+              and our team will get back to you.
+            </p>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-sm bg-oil-gold px-7 py-3 font-medium text-charcoal transition-colors hover:bg-oil-gold-light"
+            >
+              Contact Us
+            </Link>
+          </FadeUp>
         </Container>
       </section>
     </div>
