@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Container from "@/components/Container";
 import FadeUp from "@/components/motion/FadeUp";
+import FeaturedProducts from "@/components/FeaturedProducts";
 import GlowCarousel from "@/components/motion/GlowCarousel";
 import OilVortex from "@/components/motion/OilVortex";
 import StaggerText from "@/components/motion/StaggerText";
@@ -84,6 +85,8 @@ export default function Home() {
           <GlowCarousel items={carouselItems} />
         </div>
       </section>
+
+      <FeaturedProducts />
 
       <section className="bg-charcoal-light text-offwhite">
         <Container className="py-20 md:py-28">
