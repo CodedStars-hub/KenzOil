@@ -1,5 +1,6 @@
 import Container from "@/components/Container";
 import FadeUp from "@/components/motion/FadeUp";
+import { glowCard } from "@/lib/styles";
 import { categories, productsByCategory } from "@/lib/products";
 
 export default function Products() {
@@ -18,60 +19,70 @@ export default function Products() {
         </FadeUp>
       </Container>
 
-      <Container className="flex flex-col gap-16 pb-24 md:gap-20 md:pb-32">
+      <div className="flex flex-col gap-16 pb-24 md:gap-20 md:pb-32">
         {categories.map((category, index) => {
           const items = productsByCategory(category.slug);
+          const hasItems = items.length > 0;
+
           return (
             <section key={category.slug} id={category.slug} className="scroll-mt-24">
-              <FadeUp className="flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-charcoal/15 pb-4">
-                <span className="font-mono text-sm text-oil-gold">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <h2 className="text-xl font-semibold tracking-tight text-charcoal sm:text-2xl">
-                  {category.name}
-                </h2>
-                {items.length > 0 && (
-                  <span className="ml-auto text-sm text-charcoal-light/60">
-                    {items.length} product{items.length === 1 ? "" : "s"}
+              <Container>
+                <FadeUp className="flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-charcoal/15 pb-4">
+                  <span className="font-mono text-sm text-oil-gold">
+                    {String(index + 1).padStart(2, "0")}
                   </span>
-                )}
-              </FadeUp>
-
-              {items.length === 0 ? (
-                <FadeUp className="mt-6 border border-dashed border-charcoal/20 px-6 py-8 text-sm text-charcoal-light/70">
-                  Product listings for this category are being finalised —
-                  check back soon.
+                  <h2 className="text-xl font-semibold tracking-tight text-charcoal sm:text-2xl">
+                    {category.name}
+                  </h2>
+                  {hasItems && (
+                    <span className="ml-auto text-sm text-charcoal-light/60">
+                      {items.length} product{items.length === 1 ? "" : "s"}
+                    </span>
+                  )}
                 </FadeUp>
-              ) : (
-                <div className="mt-8 grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-                  {items.map((product, productIndex) => (
-                    <FadeUp
-                      key={product.slug}
-                      delay={productIndex * 0.05}
-                      lift
-                      className="flex flex-col border-t-2 border-oil-gold/60 pt-4 transition duration-200 ease-out hover:border-oil-gold hover:shadow-[0_16px_28px_-14px_rgba(26,26,26,0.35)]"
-                    >
-                      <h3 className="text-lg font-medium text-charcoal">
-                        {product.name}
-                      </h3>
-                      <p className="mt-2 flex-1 text-sm leading-relaxed text-charcoal-light/80">
-                        {product.description}
-                      </p>
-                      <a
-                        href="#"
-                        className="mt-4 inline-flex w-fit items-center gap-1.5 text-sm font-medium text-charcoal underline decoration-charcoal/30 underline-offset-4 transition-colors hover:text-oil-gold hover:decoration-oil-gold"
-                      >
-                        Download catalogue
-                        <span aria-hidden="true">↓</span>
-                      </a>
-                    </FadeUp>
-                  ))}
+
+                {!hasItems && (
+                  <FadeUp className="mt-6 border border-dashed border-charcoal/20 px-6 py-8 text-sm text-charcoal-light/70">
+                    Product listings for this category are being finalised —
+                    check back soon.
+                  </FadeUp>
+                )}
+              </Container>
+
+              {hasItems && (
+                <div className="mt-8 bg-charcoal py-12 md:py-16">
+                  <Container>
+                    <div className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+                      {items.map((product, productIndex) => (
+                        <FadeUp
+                          key={product.slug}
+                          delay={productIndex * 0.05}
+                          lift
+                          className={`flex flex-col p-6 ${glowCard}`}
+                        >
+                          <h3 className="text-lg font-medium text-offwhite">
+                            {product.name}
+                          </h3>
+                          <p className="mt-2 flex-1 text-sm leading-relaxed text-offwhite/70">
+                            {product.description}
+                          </p>
+                          <a
+                            href="#"
+                            className="mt-4 inline-flex w-fit items-center gap-1.5 text-sm font-medium text-oil-gold-light underline decoration-oil-gold-light/40 underline-offset-4 transition-colors hover:text-oil-gold hover:decoration-oil-gold"
+                          >
+                            Download catalogue
+                            <span aria-hidden="true">↓</span>
+                          </a>
+                        </FadeUp>
+                      ))}
+                    </div>
+                  </Container>
                 </div>
               )}
             </section>
           );
         })}
-      </Container>
+      </div>
     </div>
   );
 }

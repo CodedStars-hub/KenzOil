@@ -1,69 +1,65 @@
 import Link from "next/link";
 import Container from "@/components/Container";
 import FadeUp from "@/components/motion/FadeUp";
-import FadeUpLink from "@/components/motion/FadeUpLink";
+import GlowCarousel from "@/components/motion/GlowCarousel";
+import StaggerText from "@/components/motion/StaggerText";
 import { categories } from "@/lib/products";
+
+const carouselItems = categories.map((category, index) => ({
+  slug: category.slug,
+  name: category.name,
+  index,
+}));
 
 export default function Home() {
   return (
     <div>
-      <section className="bg-charcoal text-offwhite">
-        <Container className="py-24 md:py-32">
-          <FadeUp className="max-w-2xl">
-            <h1 className="text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
-              Keep Moving, Stay Ahead
-            </h1>
+      <section className="relative overflow-hidden bg-charcoal text-offwhite">
+        <Container className="relative z-10 flex flex-col items-center py-24 text-center md:py-28">
+          <h1 className="text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
+            <StaggerText text="Keep Moving, Stay Ahead" />
+          </h1>
+
+          <FadeUp delay={0.95} className="flex flex-col items-center">
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-offwhite/75">
               Automotive, industrial, and specialty lubricants engineered and
               supplied by Kenzoil — built for engines and machinery that
               can&apos;t afford to stop.
             </p>
 
-            <div className="mt-9 flex flex-wrap items-center gap-5">
+            <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
               <Link
-                href="/contact"
+                href="/products"
                 className="inline-flex items-center justify-center rounded-sm bg-oil-gold px-7 py-3 font-medium text-charcoal transition-colors hover:bg-oil-gold-light"
               >
-                Contact Us
+                Explore Products
               </Link>
-              <span className="inline-flex items-center gap-2 border border-offwhite/20 px-4 py-2 text-sm text-offwhite/70">
-                ISO 9001:2015 Certified
-              </span>
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center rounded-sm border border-offwhite/30 px-7 py-3 font-medium text-offwhite transition-colors hover:border-offwhite hover:bg-offwhite/5"
+              >
+                Request a Quote
+              </Link>
             </div>
           </FadeUp>
         </Container>
       </section>
 
-      <section>
-        <Container className="py-20 md:py-28">
-          <FadeUp className="flex flex-col gap-3 border-b border-charcoal/10 pb-8 sm:flex-row sm:items-end sm:justify-between">
-            <h2 className="text-3xl font-semibold tracking-tight text-charcoal md:text-4xl">
+      <section className="bg-charcoal">
+        <Container className="pt-20 md:pt-28">
+          <FadeUp className="flex flex-col gap-3 border-b border-offwhite/10 pb-8 sm:flex-row sm:items-end sm:justify-between">
+            <h2 className="text-3xl font-semibold tracking-tight text-offwhite md:text-4xl">
               Our Products
             </h2>
-            <p className="max-w-sm text-charcoal-light/80">
+            <p className="max-w-sm text-offwhite/70">
               Eight categories of lubricants and greases, browsable below.
             </p>
           </FadeUp>
-
-          <div className="mt-8 grid grid-cols-2 gap-px border border-charcoal/10 bg-charcoal/10 lg:grid-cols-4">
-            {categories.map((category, index) => (
-              <FadeUpLink
-                key={category.slug}
-                href={`/products#${category.slug}`}
-                delay={index * 0.05}
-                lift
-                className="group relative z-0 flex min-h-40 flex-col justify-between bg-offwhite p-6 transition duration-200 ease-out hover:z-10 hover:bg-charcoal hover:shadow-[0_16px_28px_-14px_rgba(26,26,26,0.35)]"
-              >
-                <span className="font-mono text-sm text-oil-gold">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span className="text-lg font-medium leading-snug text-charcoal transition-colors group-hover:text-offwhite">
-                  {category.name}
-                </span>
-              </FadeUpLink>
-            ))}
-          </div>
         </Container>
+
+        <div className="mt-10 pb-20 md:pb-28">
+          <GlowCarousel items={carouselItems} />
+        </div>
       </section>
 
       <section className="bg-charcoal-light text-offwhite">

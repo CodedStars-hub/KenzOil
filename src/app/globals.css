@@ -27,3 +27,36 @@ body {
     Helvetica, Arial, sans-serif;
   line-height: 1.5;
 }
+
+/* Hero pipe-flow overlay — traced SVG paths on top of the hero image.
+   Only stroke-dashoffset and opacity are ever animated. */
+@keyframes pipe-flow {
+  to {
+    stroke-dashoffset: -38;
+  }
+}
+
+@keyframes junction-glow {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.pipe-flow {
+  animation: pipe-flow 1.5s linear infinite;
+}
+
+.junction-glow {
+  animation: junction-glow 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pipe-flow,
+  .junction-glow {
+    animation: none !important;
+  }
+}
