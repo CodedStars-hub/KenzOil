@@ -48,7 +48,8 @@ export default function Products() {
                     <FadeUp
                       key={product.slug}
                       delay={productIndex * 0.05}
-                      className="flex flex-col border-t-2 border-oil-gold pt-4"
+                      lift
+                      className="flex flex-col border-t-2 border-oil-gold/60 pt-4 transition duration-200 ease-out hover:border-oil-gold hover:shadow-[0_16px_28px_-14px_rgba(26,26,26,0.35)]"
                     >
                       <h3 className="text-lg font-medium text-charcoal">
                         {product.name}

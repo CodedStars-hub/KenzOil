@@ -45,13 +45,14 @@ export default function Home() {
             </p>
           </FadeUp>
 
-          <div className="mt-8 grid grid-cols-2 gap-px overflow-hidden border border-charcoal/10 bg-charcoal/10 lg:grid-cols-4">
+          <div className="mt-8 grid grid-cols-2 gap-px border border-charcoal/10 bg-charcoal/10 lg:grid-cols-4">
             {categories.map((category, index) => (
               <FadeUpLink
                 key={category.slug}
                 href={`/products#${category.slug}`}
                 delay={index * 0.05}
-                className="group flex min-h-40 flex-col justify-between bg-offwhite p-6 transition-colors hover:bg-charcoal"
+                lift
+                className="group relative z-0 flex min-h-40 flex-col justify-between bg-offwhite p-6 transition duration-200 ease-out hover:z-10 hover:bg-charcoal hover:shadow-[0_16px_28px_-14px_rgba(26,26,26,0.35)]"
               >
                 <span className="font-mono text-sm text-oil-gold">
                   {String(index + 1).padStart(2, "0")}
