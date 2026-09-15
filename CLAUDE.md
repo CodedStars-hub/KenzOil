@@ -29,6 +29,7 @@ Recommendation: start with **option 1 (Formspree/Web3Forms)** to ship fast and g
 - **Framer Motion** — scroll reveals, card fan/tilt animation, hero entrance animation.
 - Optional: a light Three.js/canvas layer only if we want a literal 3D oil-drop; otherwise CSS/SVG gradients (like Groww's orb) are lighter and will look just as premium.
 - **Vercel** for hosting/preview links (free tier is enough for a company brochure site).
+- **Note:** project uses Tailwind CSS v4 — theme colors are defined via `@theme` in `src/app/globals.css`, not `tailwind.config.ts` (v4 has no JS config file by default).
 
 ## 5. Site map (mirrors current, restyled)
 - `/` — Home: hero (oil animation) → product category fan-cards → "Why Kenzoil" (ISO cert, mission snippet) → CTA → footer
