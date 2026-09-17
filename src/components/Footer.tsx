@@ -155,11 +155,15 @@ export default function Footer() {
               </div>
 
               {/* Operating Hours Note */}
-              <div className="mt-8 pt-6 border-t border-offwhite/10 flex flex-wrap items-center gap-2.5 text-xs font-mono text-offwhite/60">
-                <span className="text-oil-gold font-bold">OPERATING HOURS:</span>
-                <span>{siteInfo.hours.weekdays} (IST)</span>
-                <span>•</span>
-                <span className="text-offwhite/40">{siteInfo.hours.sunday}</span>
+              <div className="mt-8 pt-6 border-t border-offwhite/10">
+                <span className="font-mono text-[10px] sm:text-[11px] text-oil-gold uppercase tracking-widest font-semibold block mb-1.5">
+                  OPERATING HOURS
+                </span>
+                <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3 text-xs font-mono text-offwhite/75">
+                  <span className="font-semibold text-offwhite tracking-wide">MONDAY — SATURDAY</span>
+                  <span className="text-offwhite/40 hidden sm:inline">•</span>
+                  <span className="text-offwhite/90">9:30 AM — 7:30 PM (IST)</span>
+                </div>
               </div>
             </div>
 
@@ -293,41 +297,71 @@ export default function Footer() {
 
           </div>
 
-          {/* Row 2: Full-Width Kenzoil Locations Below Both Columns (Eliminating Gap) */}
+          {/* Row 2: Highlighted Kenzoil Locations (Office & Factory) */}
           <div className="mt-16 pt-12 border-t border-offwhite/10">
-            <div className="mb-8 flex items-center gap-4">
-              <span className="font-mono text-xs uppercase tracking-widest text-oil-gold font-bold">
-                KENZOIL LOCATIONS
-              </span>
-              <div className="h-px flex-1 bg-offwhite/10" />
+            <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <span className="h-2.5 w-1 bg-oil-gold" />
+                <span className="font-mono text-xs uppercase tracking-widest text-oil-gold font-bold">
+                  KENZOIL LOCATIONS
+                </span>
+                <span className="font-mono text-[11px] text-offwhite/40 hidden sm:inline">
+                  • PHYSICAL MANUFACTURING &amp; COMMERCIAL HUBS
+                </span>
+              </div>
+              <div className="h-px flex-1 max-w-xs bg-offwhite/10 hidden sm:block" />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-              {/* Office */}
-              <div className="flex flex-col">
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="h-2 w-2 rounded-full bg-oil-gold" />
-                  <span className="font-mono text-xs font-bold text-offwhite uppercase tracking-wider">
-                    COMMERCIAL HEADQUARTERS
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+              {/* OFFICE */}
+              <div className="rounded-sm border border-offwhite/15 bg-charcoal/40 p-6 sm:p-7 border-l-2 border-l-oil-gold transition-colors hover:bg-charcoal/60">
+                <div className="flex items-center justify-between border-b border-offwhite/10 pb-3 mb-4">
+                  <div className="flex items-center gap-2.5">
+                    <span className="px-2 py-0.5 rounded-xs bg-oil-gold/15 text-oil-gold font-mono text-[11px] font-bold uppercase tracking-wider">
+                      [ OFFICE ]
+                    </span>
+                    <span className="font-mono text-xs text-offwhite/80 font-semibold tracking-tight">
+                      COMMERCIAL HEADQUARTERS
+                    </span>
+                  </div>
+                  <span className="font-mono text-[10px] text-offwhite/40 uppercase tracking-widest">
+                    ANKLESHWAR
                   </span>
-                  <span className="font-mono text-[11px] text-offwhite/40">ANKLESHWAR, GUJARAT</span>
                 </div>
-                <address className="mt-1 text-sm text-offwhite/75 not-italic leading-relaxed pl-5 border-l border-oil-gold/30">
-                  {siteInfo.officeAddress}
+                <address className="font-mono text-xs sm:text-sm text-offwhite/80 not-italic leading-relaxed">
+                  8, J.M Complex,
+                  <br />
+                  Near Lupin Limited,
+                  <br />
+                  G.I.D.C. Estate,
+                  <br />
+                  Ankleshwar, 393002,
+                  <br />
+                  Gujarat, India
                 </address>
               </div>
 
-              {/* Factory */}
-              <div className="flex flex-col">
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="h-2 w-2 rounded-full bg-sky-400" />
-                  <span className="font-mono text-xs font-bold text-offwhite uppercase tracking-wider">
-                    BLENDING &amp; PRODUCTION PLANT
+              {/* FACTORY */}
+              <div className="rounded-sm border border-offwhite/15 bg-charcoal/40 p-6 sm:p-7 border-l-2 border-l-sky-400 transition-colors hover:bg-charcoal/60">
+                <div className="flex items-center justify-between border-b border-offwhite/10 pb-3 mb-4">
+                  <div className="flex items-center gap-2.5">
+                    <span className="px-2 py-0.5 rounded-xs bg-sky-400/15 text-sky-400 font-mono text-[11px] font-bold uppercase tracking-wider">
+                      [ FACTORY ]
+                    </span>
+                    <span className="font-mono text-xs text-offwhite/80 font-semibold tracking-tight">
+                      BLENDING &amp; PRODUCTION PLANT
+                    </span>
+                  </div>
+                  <span className="font-mono text-[10px] text-offwhite/40 uppercase tracking-widest">
+                    PANOLI G.I.D.C.
                   </span>
-                  <span className="font-mono text-[11px] text-offwhite/40">PANOLI G.I.D.C., GUJARAT</span>
                 </div>
-                <address className="mt-1 text-sm text-offwhite/75 not-italic leading-relaxed pl-5 border-l border-sky-400/30">
-                  {siteInfo.factoryAddress}
+                <address className="font-mono text-xs sm:text-sm text-offwhite/80 not-italic leading-relaxed">
+                  PLOT NO.905/11/14,
+                  <br />
+                  G.I.D.C. PANOLI-394116,
+                  <br />
+                  GUJARAT (INDIA)
                 </address>
               </div>
             </div>

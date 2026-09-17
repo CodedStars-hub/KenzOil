@@ -7,41 +7,6 @@ import Container from "@/components/Container";
 import KenzoilLogo from "@/components/KenzoilLogo";
 import { siteInfo } from "@/lib/site";
 
-/* ========================================================================== */
-/* 4 CORE PRINCIPLES WITH SCIENTIFIC TELEMETRY                                */
-/* ========================================================================== */
-interface Principle {
-  id: string;
-  title: string;
-  description: string;
-}
-
-const PRINCIPLES: Principle[] = [
-  {
-    id: "precision",
-    title: "Precision Viscosity Matching",
-    description:
-      "Formulated to match precise clearances, speeds, and shear rates under operational load.",
-  },
-  {
-    id: "boundary-defense",
-    title: "Boundary Layer Protection",
-    description:
-      "Polar anti-wear compounds anchor to metallic asperities to eliminate surface contact.",
-  },
-  {
-    id: "thermal-endurance",
-    title: "Thermal Shear Endurance",
-    description:
-      "High-viscosity-index base stocks resist oxidation, thermal thinning, and oil breakdown.",
-  },
-  {
-    id: "repeatability",
-    title: "Batch Repeatability & Purity",
-    description:
-      "Audited blending processes guarantee consistent viscosity and performance across every batch.",
-  },
-];
 
 /* ========================================================================== */
 /* REAL-WORLD APPLICATION SECTORS (ALL GROUNDED IN ACTUAL PRODUCTS)           */
@@ -122,219 +87,6 @@ const PROTECTED_ENVIRONMENTS: ProtectedEnvironment[] = [
 ];
 
 /* ========================================================================== */
-/* MACRO HYDRODYNAMIC BOUNDARY VISUALIZATION COMPONENT                        */
-/* ========================================================================== */
-function MacroHydrodynamicVisual({
-  activePrinciple,
-}: {
-  activePrinciple: Principle;
-}) {
-  const prefersReducedMotion = useReducedMotion();
-  const idPrefix = useId().replace(/:/g, "_");
-
-  return (
-    <div className="relative w-full rounded-sm border border-offwhite/10 bg-charcoal/80 p-5 sm:p-7 md:p-9 backdrop-blur-md overflow-hidden shadow-2xl">
-      {/* Background ambient lighting */}
-      <div
-        aria-hidden="true"
-        className="absolute -top-20 -left-20 w-80 h-80 rounded-full blur-3xl pointer-events-none opacity-20"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(217, 138, 61, 0.6) 0%, transparent 70%)",
-        }}
-      />
-      <div
-        aria-hidden="true"
-        className="absolute -bottom-20 -right-20 w-80 h-80 rounded-full blur-3xl pointer-events-none opacity-20"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(2, 132, 199, 0.6) 0%, transparent 70%)",
-        }}
-      />
-
-      {/* Visual Header */}
-      <div className="flex items-center justify-between border-b border-offwhite/10 pb-3 text-xs font-mono text-offwhite/60">
-        <span className="flex items-center gap-2">
-          <span className="h-1.5 w-1.5 rounded-full bg-oil-gold" />
-          <span>Hydrodynamic Film Boundary</span>
-        </span>
-        <span className="text-oil-gold/80 font-medium">Molecular Fluid Separation</span>
-      </div>
-
-      {/* SCIENTIFIC METALLIC SURFACE & AMBER FLUID CROSS-SECTION */}
-      <div className="relative my-6 h-64 sm:h-72 w-full rounded-sm border border-offwhite/10 bg-[#07080B] flex flex-col justify-between overflow-hidden">
-        {/* Subtle engineering grid */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 pointer-events-none opacity-10"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)",
-            backgroundSize: "20px 20px",
-          }}
-        />
-
-        {/* TOP METALLIC SURFACE (SLIDING RIGHT) */}
-        <div className="relative w-full h-20 sm:h-22 bg-gradient-to-b from-[#2A2E36] via-[#1E222A] to-[#12151B] border-b border-offwhite/20 shadow-md flex flex-col justify-end overflow-hidden">
-          {/* Metallic brushed lines moving right */}
-          <motion.div
-            className="absolute inset-0 opacity-25"
-            style={{
-              backgroundImage:
-                "repeating-linear-gradient(90deg, transparent, transparent 12px, rgba(255,255,255,0.15) 13px, transparent 14px)",
-            }}
-            animate={
-              prefersReducedMotion
-                ? undefined
-                : {
-                    x: [0, 60],
-                  }
-            }
-            transition={{
-              duration: 2.2,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-          />
-
-          {/* Micro-asperity peaks on metal edge */}
-          <svg
-            viewBox="0 0 1000 12"
-            className="w-full h-3 text-offwhite/20 fill-current"
-            preserveAspectRatio="none"
-          >
-            <path d="M 0,0 L 0,10 Q 50,4 100,10 T 200,8 T 300,11 T 400,7 T 500,10 T 600,8 T 700,10 T 800,7 T 900,9 T 1000,10 L 1000,0 Z" />
-          </svg>
-
-          <div className="absolute top-2.5 left-4 text-[11px] font-mono tracking-wider text-offwhite/75 font-medium">
-            Upper Metal Surface
-          </div>
-        </div>
-
-        {/* THE HYDRODYNAMIC AMBER LUBRICANT FILM (HERO FLUID BARRIER) */}
-        <div className="relative w-full h-24 sm:h-28 flex items-center justify-center overflow-hidden">
-          {/* Fluid glow backdrop */}
-          <div
-            className="absolute inset-0 opacity-80"
-            style={{
-              background:
-                "linear-gradient(90deg, rgba(217,138,61,0.15) 0%, rgba(245,158,11,0.35) 50%, rgba(217,138,61,0.15) 100%)",
-            }}
-          />
-
-          {/* Laminar Fluid Shear Lines */}
-          <svg
-            viewBox="0 0 1000 80"
-            className="absolute inset-0 w-full h-full stroke-current"
-            fill="none"
-            preserveAspectRatio="none"
-          >
-            <defs>
-              <linearGradient id={`${idPrefix}-fluid-flow`} x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#F59E0B" stopOpacity="0.2" />
-                <stop offset="50%" stopColor="#FBBF24" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="#EA580C" stopOpacity="0.2" />
-              </linearGradient>
-            </defs>
-
-            {/* Multiple shear streamline layers */}
-            {[20, 35, 50, 65].map((y, idx) => (
-              <motion.path
-                key={idx}
-                d={`M 0,${y} Q 250,${y - 4} 500,${y + 2} T 1000,${y}`}
-                stroke={`url(#${idPrefix}-fluid-flow)`}
-                strokeWidth={idx === 2 ? "2" : "1.2"}
-                strokeDasharray="16 8"
-                animate={
-                  prefersReducedMotion
-                    ? undefined
-                    : {
-                        strokeDashoffset: [0, -96],
-                      }
-                }
-                transition={{
-                  duration: 1.8 + idx * 0.4,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-              />
-            ))}
-          </svg>
-
-          {/* Polar Anti-Wear Molecular Nodes (Floating in shear) */}
-          <div className="absolute inset-0 pointer-events-none flex items-center justify-around px-8">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <motion.div
-                key={i}
-                className="h-2 w-2 rounded-full bg-amber-300 shadow-[0_0_8px_#F59E0B]"
-                animate={
-                  prefersReducedMotion
-                    ? undefined
-                    : {
-                        x: [0, 20, 0],
-                        y: [(i % 2 === 0 ? -4 : 4), (i % 2 === 0 ? 4 : -4), (i % 2 === 0 ? -4 : 4)],
-                        opacity: [0.6, 1, 0.6],
-                      }
-                }
-                transition={{
-                  duration: 2.5 + (i % 3) * 0.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: i * 0.2,
-                }}
-              />
-            ))}
-          </div>
-
-          {/* Central Callout Tag */}
-          <div className="relative z-10 px-3.5 py-1.5 rounded-full border border-oil-gold/40 bg-[#0A0C0F]/90 backdrop-blur-md shadow-lg text-[10px] sm:text-[11px] font-mono tracking-wider text-oil-gold-light flex items-center gap-2">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-            <span>UNBROKEN HYDRODYNAMIC FILM • ZERO METAL CONTACT</span>
-          </div>
-        </div>
-
-        {/* BOTTOM METALLIC SURFACE (SLIDING LEFT) */}
-        <div className="relative w-full h-20 sm:h-22 bg-gradient-to-t from-[#2A2E36] via-[#1E222A] to-[#12151B] border-t border-offwhite/20 shadow-md flex flex-col justify-start overflow-hidden">
-          {/* Micro-asperity peaks on metal edge */}
-          <svg
-            viewBox="0 0 1000 12"
-            className="w-full h-3 text-offwhite/20 fill-current"
-            preserveAspectRatio="none"
-          >
-            <path d="M 0,12 L 0,2 Q 50,8 100,2 T 200,4 T 300,1 T 400,5 T 500,2 T 600,4 T 700,2 T 800,5 T 900,3 T 1000,2 L 1000,12 Z" />
-          </svg>
-
-          {/* Metallic brushed lines moving left */}
-          <motion.div
-            className="absolute inset-0 opacity-25"
-            style={{
-              backgroundImage:
-                "repeating-linear-gradient(90deg, transparent, transparent 12px, rgba(255,255,255,0.15) 13px, transparent 14px)",
-            }}
-            animate={
-              prefersReducedMotion
-                ? undefined
-                : {
-                    x: [0, -60],
-                  }
-            }
-            transition={{
-              duration: 2.2,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-          />
-
-          <div className="absolute bottom-2.5 left-4 text-[11px] font-mono tracking-wider text-offwhite/75 font-medium">
-            Lower Metal Surface
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ========================================================================== */
 /* HERO INDUSTRIAL ENVIRONMENT VISUAL COMPONENT                               */
 /* ========================================================================== */
 function HeroEnvironmentVisual({
@@ -346,7 +98,7 @@ function HeroEnvironmentVisual({
   const id = useId().replace(/:/g, "_");
 
   return (
-    <div className="relative w-full rounded-sm border border-offwhite/15 bg-charcoal/90 p-5 sm:p-7 md:p-8 backdrop-blur-md overflow-hidden shadow-2xl min-h-[460px] sm:min-h-[500px] flex flex-col justify-between">
+    <div className="relative w-full h-full rounded-sm border border-offwhite/15 bg-charcoal/90 p-5 sm:p-7 md:p-8 backdrop-blur-md overflow-hidden shadow-2xl flex flex-col justify-between">
       {/* Dynamic ambient atmospheric lighting reacting to active environment */}
       <div
         aria-hidden="true"
@@ -391,7 +143,7 @@ function HeroEnvironmentVisual({
       </div>
 
       {/* Canvas Center: Authentic Industrial Machinery Schematic SVG */}
-      <div className="relative z-10 my-6 h-56 sm:h-64 w-full flex items-center justify-center rounded-sm border border-offwhite/10 bg-[#07080B]/90 overflow-hidden">
+      <div className="relative z-10 my-4 sm:my-6 flex-1 min-h-[280px] sm:min-h-[320px] w-full flex items-center justify-center rounded-sm border border-offwhite/10 bg-[#07080B]/90 overflow-hidden">
         {environment.id === "heavy-transport" && (
           /* Heavy Transport: Piston-Cylinder Combustion & Hydrodynamic Skirt Film */
           <svg
@@ -699,8 +451,7 @@ function HeroEnvironmentVisual({
 /* MAIN "ABOUT KENZOIL" MASTER COMPONENT                                      */
 /* ========================================================================== */
 export default function AboutKenzoil() {
-  const [activePrincipleIndex, setActivePrincipleIndex] = useState(0);
-  const activePrinciple = PRINCIPLES[activePrincipleIndex];
+  const prefersReducedMotion = useReducedMotion();
   const [activeSectorIndex, setActiveSectorIndex] = useState(0);
   const activeSector = PROTECTED_ENVIRONMENTS[activeSectorIndex];
 
@@ -760,114 +511,169 @@ export default function AboutKenzoil() {
       </section>
 
       {/* ================================================================== */}
-      {/* 03. THE CORE PURPOSE: EDITORIAL BRAND MANIFESTO                    */}
+      {/* 03. THE CORE PURPOSE: EDITORIAL BRAND MANIFESTO & ACTIVE SYSTEM   */}
       {/* ================================================================== */}
-      <section className="relative py-24 md:py-32 border-b border-offwhite/10 bg-gradient-to-b from-transparent via-charcoal/20 to-transparent">
-        <Container>
-          <div className="max-w-5xl">
-            {/* Primary Section Title with Editorial Importance */}
-            <div className="flex items-center gap-4 mb-6">
-              <span className="h-0.5 w-12 sm:w-16 bg-oil-gold" />
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-[0.25em] text-oil-gold">
-                The Core Purpose
-              </h2>
-            </div>
+      <section className="relative py-24 md:py-32 border-b border-offwhite/10 overflow-hidden bg-gradient-to-b from-transparent via-[#090C10] to-transparent">
+        {/* Subtle Background Geometric Construction & Motion Trace */}
+        <div aria-hidden="true" className="absolute inset-0 pointer-events-none select-none">
+          {/* Faint Architectural Grid Fragment */}
+          <div
+            className="absolute inset-0 opacity-[0.02]"
+            style={{
+              backgroundImage:
+                "linear-gradient(to right, #FFFFFF 1px, transparent 1px), linear-gradient(to bottom, #FFFFFF 1px, transparent 1px)",
+              backgroundSize: "40px 40px",
+            }}
+          />
 
-            {/* Dominant Statement (Primary visual weight) */}
-            <h3 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.04] text-offwhite uppercase">
-              Lubrication is not an afterthought.
-            </h3>
+          {/* Precision Engineering Construction SVG */}
+          <svg className="absolute inset-0 w-full h-full stroke-offwhite/[0.04] fill-none">
+            <defs>
+              <linearGradient id="core-purpose-trace" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#F59E0B" stopOpacity="0" />
+                <stop offset="30%" stopColor="#F59E0B" stopOpacity="0.5" />
+                <stop offset="70%" stopColor="#EA580C" stopOpacity="0.7" />
+                <stop offset="100%" stopColor="#F59E0B" stopOpacity="0" />
+              </linearGradient>
+            </defs>
 
-            {/* Supporting Statement (Secondary visual weight) */}
-            <p className="mt-5 text-2xl sm:text-3xl md:text-4xl font-medium tracking-tight text-offwhite/75 leading-snug">
-              It is the active lifeline of heavy industrial motion.
-            </p>
+            {/* Geometric Concentric Arcs */}
+            <circle cx="85%" cy="40%" r="280" strokeWidth="0.75" strokeDasharray="3 9" />
+            <circle cx="85%" cy="40%" r="380" strokeWidth="0.5" />
+            <circle cx="85%" cy="40%" r="480" strokeWidth="0.5" strokeDasharray="6 12" />
 
-            {/* Concise Supporting Copy: 2 clean editorial paragraphs */}
-            <div className="mt-10 sm:mt-12 pt-8 border-t border-offwhite/10 grid grid-cols-1 md:grid-cols-2 gap-8 text-base sm:text-lg text-offwhite/75 leading-relaxed font-normal">
-              <p>
-                At Kenzoil, lubricants are engineered as precision machinery elements. Formulated from premium Group II and III base stocks with targeted extreme-pressure additives, each fluid establishes an unbroken hydrodynamic barrier that isolates metal surfaces under intense shear.
-              </p>
-              <p>
-                Synthesized at our dedicated blending and laboratory infrastructure in Panoli and Ankleshwar, our formulations stabilize thermal surges, prevent premature abrasive wear, and protect heavy industrial capital through continuous, non-stop operation.
-              </p>
-            </div>
+            {/* Precision Crosshair Marks */}
+            <path d="M 60 120 L 76 120 M 68 112 L 68 128" strokeWidth="1" stroke="rgba(245,158,11,0.25)" />
+            <path d="M 850 80 L 866 80 M 858 72 L 858 88" strokeWidth="1" stroke="rgba(245,158,11,0.25)" />
+            <path d="M 1200 450 L 1216 450 M 1208 442 L 1208 458" strokeWidth="1" stroke="rgba(245,158,11,0.25)" />
 
-            {/* Quiet, elegant facility note */}
-            <div className="mt-8 flex items-center gap-3 text-xs font-mono text-offwhite/50">
-              <span className="h-1.5 w-1.5 rounded-full bg-oil-gold" />
-              <span>Panoli G.I.D.C. Blending Facility • Ankleshwar Commercial HQ • Gujarat, India</span>
-            </div>
-          </div>
-        </Container>
-      </section>
+            {/* Subtle Motion Line: Thin Fluid Streamline Passing Across Section */}
+            <motion.path
+              d="M -100 240 C 300 240, 500 200, 800 220 C 1100 240, 1400 180, 1800 210"
+              stroke="url(#core-purpose-trace)"
+              strokeWidth="1.25"
+              strokeDasharray="24 16"
+              fill="none"
+              animate={prefersReducedMotion ? undefined : { strokeDashoffset: [0, -80] }}
+              transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+            />
+          </svg>
 
-      {/* ================================================================== */}
-      {/* 04. CHAPTER 3: THE KENZOIL APPROACH & MACRO BOUNDARY VISUALIZATION */}
-      {/* ================================================================== */}
-      <section className="relative py-20 md:py-28 border-b border-offwhite/10">
-        <Container>
-          {/* Section Header */}
-          <div className="max-w-2xl mb-12 sm:mb-16">
-            <span className="text-xs font-mono uppercase tracking-widest text-oil-gold">
-              THE KENZOIL APPROACH
+          {/* Faint Atmospheric Fluid Glow */}
+          <div className="absolute top-1/3 -left-20 w-96 h-96 rounded-full bg-amber-500/[0.03] blur-[120px]" />
+          <div className="absolute bottom-10 right-10 w-96 h-96 rounded-full bg-sky-500/[0.02] blur-[140px]" />
+        </div>
+
+        <Container className="relative z-10">
+          {/* Editorial Chapter Marker with Presence */}
+          <div className="mb-10 sm:mb-14 flex items-center gap-4">
+            <span className="font-mono text-xs uppercase tracking-[0.3em] text-oil-gold font-bold">
+              02 / MANIFESTO
             </span>
-            <h3 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-offwhite">
-              What Happens Between Moving Surfaces.
-            </h3>
-            <p className="mt-4 text-sm sm:text-base text-offwhite/70 leading-relaxed">
-              When two precision-machined metal components slide against each other under
-              massive pressure, our lubricant film maintains an unbroken hydrodynamic barrier.
-              Explore our four formulation pillars below:
+            <div className="h-px w-10 sm:w-16 bg-oil-gold/40" />
+            <h2 className="font-mono text-xs uppercase tracking-[0.3em] text-offwhite/50">
+              THE CORE PURPOSE
+            </h2>
+          </div>
+
+          {/* Statement & Abstract Active System Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            
+            {/* Left 8 Cols: Main Statement with High Typographic Tension */}
+            <div className="lg:col-span-8 flex flex-col">
+              <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.04] text-offwhite uppercase">
+                Lubrication is <span className="text-transparent bg-clip-text bg-gradient-to-r from-offwhite via-offwhite to-offwhite/60">not an afterthought.</span>
+              </h3>
+
+              <div className="relative mt-6 sm:mt-8 pl-6 sm:pl-8 border-l-2 border-oil-gold/80">
+                <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight text-offwhite/90 leading-snug">
+                  It is the <span className="text-oil-gold font-bold">active lifeline</span> of heavy industrial motion.
+                </p>
+                <span className="block mt-2 text-xs font-mono uppercase tracking-[0.2em] text-offwhite/40">
+                  Continuous Hydrodynamic Separation Under Severe Shear
+                </span>
+              </div>
+            </div>
+
+            {/* Right 4 Cols: Restrained Abstract "Active System" Visualization */}
+            <div className="lg:col-span-4">
+              <div className="relative w-full rounded-sm border border-offwhite/15 bg-gradient-to-b from-charcoal/90 via-[#0B0D11] to-charcoal/80 p-5 backdrop-blur-sm shadow-xl">
+                {/* Visual Header */}
+                <div className="flex items-center justify-between pb-3 border-b border-offwhite/10 text-[10px] font-mono text-offwhite/50">
+                  <span className="flex items-center gap-1.5 text-offwhite/80">
+                    <span className="h-1.5 w-1.5 rounded-full bg-oil-gold" />
+                    <span>LUBRICANT FILM SEPARATION</span>
+                  </span>
+                  <span className="text-oil-gold font-semibold">h ~ 1–10 µm</span>
+                </div>
+
+                {/* Abstract Metallic Boundary Surfaces & Laminar Amber Layer */}
+                <div className="relative my-4 h-32 w-full rounded-xs bg-[#050608] border border-offwhite/10 overflow-hidden flex flex-col justify-between">
+                  {/* Upper Metallic Surface */}
+                  <div className="relative h-9 w-full bg-gradient-to-b from-[#2E333D] to-[#171A21] border-b border-offwhite/20 flex items-center justify-between px-3">
+                    <span className="text-[9px] font-mono uppercase tracking-wider text-offwhite/60">
+                      Moving Boundary Plate
+                    </span>
+                    <span className="text-[9px] font-mono text-offwhite/40">→ v</span>
+                  </div>
+
+                  {/* Amber Fluid Shear Layer */}
+                  <div className="relative flex-1 bg-gradient-to-r from-amber-500/20 via-amber-400/30 to-amber-500/20 flex items-center justify-center overflow-hidden">
+                    {/* Animated Streamline */}
+                    <motion.div
+                      className="absolute inset-0 opacity-70"
+                      style={{
+                        backgroundImage:
+                          "repeating-linear-gradient(90deg, transparent, transparent 20px, rgba(245,158,11,0.5) 21px, transparent 32px)",
+                      }}
+                      animate={prefersReducedMotion ? undefined : { x: [0, 48] }}
+                      transition={{ duration: 2.8, repeat: Infinity, ease: "linear" }}
+                    />
+                    <span className="relative z-10 font-mono text-[9px] uppercase tracking-widest text-oil-gold font-bold px-2 py-0.5 rounded-xs bg-charcoal/90 border border-oil-gold/30 shadow-sm">
+                      Hydrodynamic Barrier
+                    </span>
+                  </div>
+
+                  {/* Lower Stationary Metallic Surface */}
+                  <div className="relative h-9 w-full bg-gradient-to-t from-[#2E333D] to-[#171A21] border-t border-offwhite/20 flex items-center justify-between px-3">
+                    <span className="text-[9px] font-mono uppercase tracking-wider text-offwhite/60">
+                      Stationary Machine Surface
+                    </span>
+                    <span className="text-[9px] font-mono text-offwhite/40">v = 0</span>
+                  </div>
+                </div>
+
+                {/* Footnote */}
+                <div className="text-[10px] font-mono text-offwhite/40 flex items-center justify-between">
+                  <span>ZERO ASPERITY CONTACT</span>
+                  <span className="text-emerald-400 font-semibold">100% FLUID FILM</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Concise Supporting Copy: 2 Clean Editorial Paragraphs */}
+          <div className="mt-12 pt-8 border-t border-offwhite/10 grid grid-cols-1 md:grid-cols-2 gap-8 text-base sm:text-lg text-offwhite/75 leading-relaxed font-normal">
+            <p>
+              At Kenzoil, lubricants are engineered as precision machinery elements. Formulated from premium Group II and III base stocks with targeted extreme-pressure additives, each fluid establishes an unbroken hydrodynamic barrier that isolates metal surfaces under intense shear.
+            </p>
+            <p>
+              Synthesized at our dedicated blending and laboratory infrastructure in Panoli and Ankleshwar, our formulations stabilize thermal surges, prevent premature abrasive wear, and protect heavy industrial capital through continuous, non-stop operation.
             </p>
           </div>
 
-          {/* Interactive Scientific Visual & Principle Selector */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            {/* Left 5 Cols: Principle Scrubbing Tabs (Visually stable, NO hover animations) */}
-            <div className="lg:col-span-5 flex flex-col gap-3">
-              {PRINCIPLES.map((p, idx) => {
-                const isActive = idx === activePrincipleIndex;
-                return (
-                  <button
-                    key={p.id}
-                    onClick={() => setActivePrincipleIndex(idx)}
-                    className={`text-left p-4 sm:p-5 rounded-sm border cursor-pointer select-none ${
-                      isActive
-                        ? "border-oil-gold bg-charcoal/90"
-                        : "border-offwhite/10 bg-charcoal/30"
-                    }`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <h4
-                        className={`text-base sm:text-lg font-semibold tracking-tight ${
-                          isActive ? "text-offwhite" : "text-offwhite/80"
-                        }`}
-                      >
-                        {p.title}
-                      </h4>
-                      {isActive && (
-                        <span className="h-1.5 w-1.5 rounded-full bg-oil-gold" />
-                      )}
-                    </div>
-                    <p className="mt-1.5 text-xs sm:text-sm text-offwhite/65 leading-relaxed">
-                      {p.description}
-                    </p>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Right 7 Cols: The Scientific Macro Visual */}
-            <div className="lg:col-span-7">
-              <MacroHydrodynamicVisual activePrinciple={activePrinciple} />
-            </div>
+          {/* Quiet, Elegant Facility Note */}
+          <div className="mt-8 flex items-center gap-3 text-xs font-mono text-offwhite/50">
+            <span className="h-1.5 w-1.5 rounded-full bg-oil-gold" />
+            <span>Panoli G.I.D.C. Blending Facility • Ankleshwar Commercial HQ • Gujarat, India</span>
           </div>
+
         </Container>
       </section>
 
       {/* ================================================================== */}
-      {/* 05. WHERE KENZOIL PROTECTS: HERO INDUSTRIAL VISUAL SYSTEM          */}
+      {/* 04. WHERE KENZOIL PROTECTS: HERO INDUSTRIAL VISUAL SYSTEM          */}
       {/* ================================================================== */}
       <section id="where-kenzoil-protects" className="relative py-24 md:py-32 border-b border-offwhite/10 bg-gradient-to-b from-transparent via-[#0B0E14]/60 to-transparent">
         <Container>
@@ -899,17 +705,17 @@ export default function AboutKenzoil() {
                   className={`px-3.5 py-2 rounded-xs text-xs font-mono uppercase tracking-wider whitespace-nowrap transition-all cursor-pointer ${
                     isSelected
                       ? "bg-oil-gold text-charcoal font-bold shadow-md"
-                      : "border border-offwhite/10 bg-charcoal/40 text-offwhite/60 hover:text-offwhite"
+                      : "bg-charcoal/80 text-offwhite/70 border border-offwhite/10"
                   }`}
                 >
-                  {item.badge}
+                  {item.title}
                 </button>
               );
             })}
           </div>
 
           {/* Desktop & Tablet: Interactive Application List & Hero Visual Canvas */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
             
             {/* Left 5 Columns: Interactive Application Items (Hover & Click Supported) */}
             <div className="lg:col-span-5 flex flex-col gap-3">
@@ -962,7 +768,7 @@ export default function AboutKenzoil() {
             </div>
 
             {/* Right 7 Columns: Dynamic Hero Industrial Visual Canvas */}
-            <div className="lg:col-span-7">
+            <div className="lg:col-span-7 flex flex-col h-full">
               <HeroEnvironmentVisual environment={activeSector} />
             </div>
 
