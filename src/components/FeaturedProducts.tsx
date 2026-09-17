@@ -1,29 +1,34 @@
+"use client";
+
+import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import Container from "@/components/Container";
 import FadeUp from "@/components/motion/FadeUp";
 
-type FeaturedItem = {
+export type FeaturedItem = {
   id: string;
   index: string;
   name: string;
   categorySlug: string;
   categoryLabel: string;
   applicationTag: string;
-  description: string;
-  visualType: "diesel" | "hydraulic" | "multigrade" | "gear";
+  shortDescription: string;
+  image: string;
 };
 
-const featuredProducts: FeaturedItem[] = [
+export const featuredProducts: FeaturedItem[] = [
   {
     id: "diesel-engine-oils",
     index: "01",
     name: "Diesel Engine Oils",
     categorySlug: "automotive",
     categoryLabel: "Automotive Lubricants",
-    applicationTag: "Heavy Duty Diesel",
-    description:
-      "Engineered for modern high-performance diesel engines operating in heavy-duty applications including trucks, mining, construction, and power generation sets.",
-    visualType: "diesel",
+    applicationTag: "Heavy-Duty Diesel",
+    shortDescription:
+      "High-performance heavy-duty diesel lubrication engineered for commercial transport and severe operating loads.",
+    image: "/images/featured/diesel-engine-oils.jpg",
   },
   {
     id: "hydraulic-oils",
@@ -32,9 +37,9 @@ const featuredProducts: FeaturedItem[] = [
     categorySlug: "industrial",
     categoryLabel: "Industrial Lubricants",
     applicationTag: "Anti-Wear Hydraulic",
-    description:
-      "Premium quality, transparent anti-wear hydraulic oils blended from high viscosity index base oils, formulated to perform reliably from low to high load conditions.",
-    visualType: "hydraulic",
+    shortDescription:
+      "Premium anti-wear hydraulic formulation delivering smooth power transmission and superior cavitation defense.",
+    image: "/images/featured/hydraulic-oils.jpg",
   },
   {
     id: "super-multigrade-engine-oil",
@@ -43,9 +48,9 @@ const featuredProducts: FeaturedItem[] = [
     categorySlug: "automotive",
     categoryLabel: "Automotive Lubricants",
     applicationTag: "All-Season Multigrade",
-    description:
-      "Blended with shear-stable VI improvers, metallic detergent dispersants, and anti-oxidants to meet requirements of gasoline and diesel engines across all seasons.",
-    visualType: "multigrade",
+    shortDescription:
+      "All-season multi-grade formulation delivering rapid cold starts and resilient high-temperature engine protection.",
+    image: "/images/featured/super-multigrade-oil.jpg",
   },
   {
     id: "industrial-gear-oils",
@@ -54,344 +59,244 @@ const featuredProducts: FeaturedItem[] = [
     categorySlug: "industrial",
     categoryLabel: "Industrial Lubricants",
     applicationTag: "Extreme Pressure (EP)",
-    description:
-      "Produced with high-quality base oils blended with EP, antioxidant, and anti-corrosion additives to provide high load-carrying capacity in industrial gearing.",
-    visualType: "gear",
+    shortDescription:
+      "Extreme-pressure industrial gear lubricant providing heavy load-carrying capacity and tooth surface protection.",
+    image: "/images/featured/industrial-gear-oils.jpg",
   },
 ];
 
-function ProductVisual({ type }: { type: FeaturedItem["visualType"] }) {
-  switch (type) {
-    case "diesel":
-      return (
-        <svg
-          viewBox="0 0 160 120"
-          className="h-24 w-auto text-oil-gold"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-        >
-          {/* Cylinder chamber outline */}
-          <rect
-            x="35"
-            y="20"
-            width="90"
-            height="80"
-            rx="4"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeOpacity="0.4"
-          />
-          {/* Piston head */}
-          <rect
-            x="45"
-            y="42"
-            width="70"
-            height="32"
-            rx="2"
-            fill="currentColor"
-            fillOpacity="0.12"
-            stroke="currentColor"
-            strokeWidth="1.5"
-          />
-          {/* Pressure rings */}
-          <line
-            x1="45"
-            y1="50"
-            x2="115"
-            y2="50"
-            stroke="currentColor"
-            strokeWidth="1"
-            strokeOpacity="0.6"
-          />
-          <line
-            x1="45"
-            y1="58"
-            x2="115"
-            y2="58"
-            stroke="currentColor"
-            strokeWidth="1"
-            strokeOpacity="0.6"
-          />
-          {/* Connecting rod */}
-          <path
-            d="M 80 74 L 80 100"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-          />
-          {/* Lubrication fluid compression arcs */}
-          <path
-            d="M 55 30 Q 80 24 105 30"
-            stroke="#fff1d6"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeOpacity="0.8"
-          />
-          <circle cx="80" cy="27" r="2.5" fill="#e8a855" />
-        </svg>
-      );
-
-    case "hydraulic":
-      return (
-        <svg
-          viewBox="0 0 160 120"
-          className="h-24 w-auto text-oil-gold"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-        >
-          {/* Hydraulic system pressure loops */}
-          <circle
-            cx="80"
-            cy="60"
-            r="38"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeOpacity="0.3"
-            strokeDasharray="4 3"
-          />
-          {/* Central fluid core */}
-          <circle
-            cx="80"
-            cy="60"
-            r="22"
-            fill="currentColor"
-            fillOpacity="0.1"
-            stroke="currentColor"
-            strokeWidth="1.75"
-          />
-          {/* High-pressure valve conduits */}
-          <line
-            x1="25"
-            y1="60"
-            x2="58"
-            y2="60"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-          <line
-            x1="102"
-            y1="60"
-            x2="135"
-            y2="60"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-          <line
-            x1="80"
-            y1="22"
-            x2="80"
-            y2="38"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-          <line
-            x1="80"
-            y1="82"
-            x2="80"
-            y2="98"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-          {/* Flow indicator nodes */}
-          <circle cx="42" cy="60" r="3" fill="#e8a855" />
-          <circle cx="118" cy="60" r="3" fill="#e8a855" />
-          <circle cx="80" cy="60" r="4" fill="#fff1d6" fillOpacity="0.9" />
-        </svg>
-      );
-
-    case "multigrade":
-      return (
-        <svg
-          viewBox="0 0 160 120"
-          className="h-24 w-auto text-oil-gold"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-        >
-          {/* Dual viscosity shear curves */}
-          <path
-            d="M 30 75 C 55 35, 105 35, 130 75"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-          <path
-            d="M 30 55 C 60 85, 100 85, 130 55"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeOpacity="0.45"
-            strokeLinecap="round"
-          />
-          {/* Intersecting molecular lubrication shear plane */}
-          <ellipse
-            cx="80"
-            cy="65"
-            rx="32"
-            ry="14"
-            stroke="#fff1d6"
-            strokeWidth="1.25"
-            strokeOpacity="0.75"
-            fill="currentColor"
-            fillOpacity="0.08"
-          />
-          {/* Multi-grade rating markers */}
-          <circle cx="55" cy="55" r="3.5" fill="#e8a855" />
-          <circle cx="80" cy="65" r="3.5" fill="#fff1d6" />
-          <circle cx="105" cy="55" r="3.5" fill="#e8a855" />
-        </svg>
-      );
-
-    case "gear":
-      return (
-        <svg
-          viewBox="0 0 160 120"
-          className="h-24 w-auto text-oil-gold"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-        >
-          {/* Interlocking industrial gear pair */}
-          {/* Primary gear */}
-          <circle
-            cx="66"
-            cy="60"
-            r="24"
-            fill="currentColor"
-            fillOpacity="0.1"
-            stroke="currentColor"
-            strokeWidth="1.75"
-          />
-          <circle cx="66" cy="60" r="7" stroke="currentColor" strokeWidth="1.5" />
-          {/* Gear teeth indicators */}
-          <path
-            d="M 66 30 L 66 36 M 66 84 L 66 90 M 36 60 L 42 60 M 90 60 L 96 60 M 45 40 L 50 44 M 82 76 L 87 80 M 45 80 L 50 76 M 82 44 L 87 40"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeOpacity="0.7"
-          />
-          {/* Secondary smaller pinion gear */}
-          <circle
-            cx="106"
-            cy="50"
-            r="16"
-            fill="currentColor"
-            fillOpacity="0.12"
-            stroke="currentColor"
-            strokeWidth="1.5"
-          />
-          <circle cx="106" cy="50" r="5" stroke="currentColor" strokeWidth="1" />
-          {/* Extreme-pressure contact mesh highlight */}
-          <circle cx="88" cy="55" r="3" fill="#fff1d6" />
-        </svg>
-      );
-  }
-}
-
 export default function FeaturedProducts() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const prefersReducedMotion = useReducedMotion();
+  const current = featuredProducts[activeIndex];
+
   return (
-    <section className="bg-offwhite py-20 md:py-28">
-      <Container>
-        {/* Section Header */}
-        <FadeUp className="flex flex-col gap-4 border-b border-charcoal/10 pb-8 sm:flex-row sm:items-end sm:justify-between">
+    <section className="relative overflow-hidden bg-offwhite py-20 md:py-28">
+      {/* Soft atmospheric ambient glow behind the spotlight area */}
+      <div
+        className="pointer-events-none absolute top-1/2 right-1/4 -translate-y-1/2 h-[480px] w-[480px] rounded-full opacity-35 blur-3xl"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(217,138,61,0.22) 0%, rgba(232,168,85,0.09) 45%, transparent 70%)",
+        }}
+        aria-hidden="true"
+      />
+
+      <Container className="relative z-10">
+        {/* 1. Clear Section Heading Hierarchy */}
+        <FadeUp className="flex flex-col gap-3 border-b border-charcoal/10 pb-8 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <span className="font-mono text-xs uppercase tracking-wider text-oil-gold">
-              // Selected Formulations
+            <span className="font-mono text-xs uppercase tracking-widest text-oil-gold font-medium">
+              SELECTED FORMULATIONS
             </span>
-            <h2 className="mt-2 text-3xl font-semibold tracking-tight text-charcoal md:text-4xl">
+            <h2 className="mt-2 text-3xl font-normal tracking-tight text-charcoal sm:text-4xl md:text-5xl font-editorial">
               Featured Products
             </h2>
-            <p className="mt-3 max-w-xl text-base leading-relaxed text-charcoal-light/75">
-              A selection of automotive and industrial lubricants engineered for
-              engines, machinery, and equipment operating under demanding
-              conditions.
-            </p>
           </div>
 
           <Link
             href="/products"
-            className="inline-flex w-fit items-center gap-1.5 text-sm font-medium text-charcoal underline decoration-charcoal/30 underline-offset-4 transition-colors hover:text-oil-gold hover:decoration-oil-gold sm:pb-1"
+            className="group inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-charcoal transition-colors hover:text-oil-gold sm:pb-1"
           >
-            <span>View all products</span>
-            <span aria-hidden="true">→</span>
+            <span>View All Products</span>
+            <span
+              className="transition-transform duration-200 group-hover:translate-x-1"
+              aria-hidden="true"
+            >
+              →
+            </span>
           </Link>
         </FadeUp>
 
-        {/* Product Cards Grid */}
-        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {featuredProducts.map((product, index) => (
-            <FadeUp
-              key={product.id}
-              delay={index * 0.08}
-              lift
-              className="group relative flex flex-col justify-between overflow-hidden rounded-sm border border-charcoal/10 bg-white transition-all duration-300 hover:border-oil-gold/60 hover:shadow-[0_16px_32px_-12px_rgba(26,26,26,0.12)]"
-            >
-              <div>
-                {/* Visual Emblem Container */}
-                <div className="relative flex h-48 w-full items-center justify-center overflow-hidden bg-charcoal p-6">
-                  {/* Subtle ambient glow behind emblem */}
-                  <div
-                    className="absolute h-32 w-32 rounded-full opacity-20 blur-xl pointer-events-none"
-                    style={{
-                      background:
-                        "radial-gradient(circle, rgba(217,138,61,0.8) 0%, transparent 70%)",
-                    }}
-                  />
+        {/* 2. Open Editorial Spotlight Composition */}
+        <div className="mt-12 grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-16">
+          {/* LEFT SIDE: Product Typography & Direct Action (5 cols, order-2 on mobile, order-1 on desktop) */}
+          <div className="order-2 relative flex flex-col justify-center lg:order-1 lg:col-span-5">
+            {/* Subtle atmospheric ambient glow behind the title area */}
+            <div
+              className="pointer-events-none absolute -top-12 -left-8 -z-10 h-72 w-72 rounded-full opacity-25 blur-3xl"
+              style={{
+                background:
+                  "radial-gradient(circle, rgba(217,138,61,0.25) 0%, rgba(232,168,85,0.1) 40%, transparent 70%)",
+              }}
+              aria-hidden="true"
+            />
 
-                  {/* Application pill badge */}
-                  <div className="absolute top-3.5 right-3.5 z-10">
-                    <span className="inline-flex items-center rounded-xs bg-charcoal-light/90 px-2.5 py-1 font-mono text-[10px] tracking-wide text-oil-gold-light border border-oil-gold/20">
-                      {product.applicationTag}
-                    </span>
-                  </div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={current.id}
+                initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: -10 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="relative flex flex-col"
+              >
+                {/* Subtle Industrial Watermark Index in Background for layered depth */}
+                <span
+                  className="pointer-events-none absolute -top-10 -left-4 -z-10 select-none font-mono text-8xl sm:text-9xl font-black text-charcoal/[0.035] tracking-tighter leading-none"
+                  aria-hidden="true"
+                >
+                  {current.index}
+                </span>
 
-                  {/* Bespoke Industrial Vector Graphic */}
-                  <div className="relative z-0 transition-transform duration-300 ease-out group-hover:scale-105">
-                    <ProductVisual type={product.visualType} />
-                  </div>
+                {/* Application Tag Pill (No redundant '01 // AUTOMOTIVE' category line) */}
+                <div className="flex items-center">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-oil-gold/30 bg-oil-gold/10 px-3.5 py-1 font-mono text-xs font-medium text-charcoal shadow-2xs backdrop-blur-xs">
+                    <span className="h-1.5 w-1.5 rounded-full bg-oil-gold" />
+                    {current.applicationTag}
+                  </span>
                 </div>
 
-                {/* Card Content */}
-                <div className="p-6">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="font-mono text-oil-gold font-medium">
-                      {product.index} // {product.categoryLabel.split(" ")[0]}
-                    </span>
-                  </div>
-
-                  <h3 className="mt-2.5 text-lg font-semibold tracking-tight text-charcoal transition-colors group-hover:text-charcoal">
-                    {product.name}
+                {/* Refined Editorial Product Title with Oil-Gold Left Anchor */}
+                <div className="mt-4 border-l-2 border-oil-gold pl-4 sm:pl-5">
+                  <h3 className="text-3xl font-normal tracking-tight text-charcoal sm:text-4xl lg:text-5xl font-editorial leading-[1.08]">
+                    {current.name}
                   </h3>
 
-                  <p className="mt-2.5 text-sm leading-relaxed text-charcoal-light/75">
-                    {product.description}
+                  {/* Concise 8–15 Word Description */}
+                  <p className="mt-3.5 text-base leading-relaxed text-charcoal-light/85 sm:text-lg max-w-md">
+                    {current.shortDescription}
                   </p>
                 </div>
-              </div>
 
-              {/* Card Footer Action */}
-              <div className="border-t border-charcoal/5 px-6 py-4">
-                <Link
-                  href={`/products#${product.categorySlug}`}
-                  className="inline-flex items-center gap-1.5 text-sm font-medium text-charcoal transition-colors group-hover:text-oil-gold"
-                >
-                  <span>Explore in Catalogue</span>
-                  <span
-                    className="transition-transform duration-200 group-hover:translate-x-1"
-                    aria-hidden="true"
+                {/* Redesigned Integrated Oil-Gold CTA Button */}
+                <div className="mt-8 pl-4 sm:pl-5">
+                  <Link
+                    href={`/products#${current.categorySlug}`}
+                    className="group inline-flex items-center gap-3 rounded-full bg-oil-gold px-7 py-3.5 text-sm font-medium text-charcoal shadow-[0_4px_20px_-4px_rgba(217,138,61,0.45)] transition-all duration-300 hover:bg-oil-gold-light hover:shadow-[0_8px_28px_-4px_rgba(217,138,61,0.65)] hover:-translate-y-0.5"
                   >
-                    →
-                  </span>
-                </Link>
-              </div>
-            </FadeUp>
-          ))}
+                    <span>Explore in Catalogue</span>
+                    <span
+                      className="transition-transform duration-200 group-hover:translate-x-1"
+                      aria-hidden="true"
+                    >
+                      →
+                    </span>
+                  </Link>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* RIGHT SIDE: Floating Cinematic Product Visual (7 cols, order-1 on mobile, order-2 on desktop) */}
+          <div className="order-1 relative flex items-center justify-center lg:order-2 lg:col-span-7">
+            {/* Ambient liquid glow behind the image */}
+            <div
+              className="pointer-events-none absolute h-[340px] w-[340px] sm:h-[440px] sm:w-[440px] rounded-full opacity-60 blur-3xl"
+              style={{
+                background:
+                  "radial-gradient(circle, rgba(217,138,61,0.28) 0%, rgba(181,80,43,0.1) 45%, transparent 70%)",
+              }}
+              aria-hidden="true"
+            />
+
+            {/* Continuous Gentle Floating Motion */}
+            <motion.div
+              animate={prefersReducedMotion ? {} : { y: [0, -10, 0] }}
+              transition={{
+                duration: 6.5,
+                ease: "easeInOut",
+                repeat: Infinity,
+              }}
+              className="relative w-full max-w-[520px]"
+            >
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={current.id}
+                  initial={
+                    prefersReducedMotion
+                      ? { opacity: 1 }
+                      : { opacity: 0, scale: 0.97 }
+                  }
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={
+                    prefersReducedMotion
+                      ? { opacity: 0 }
+                      : { opacity: 0, scale: 1.02 }
+                  }
+                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                  className="relative aspect-[4/3] w-full overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] bg-charcoal shadow-[0_24px_50px_-12px_rgba(26,26,26,0.15),0_12px_32px_-6px_rgba(217,138,61,0.18)]"
+                >
+                  <Image
+                    src={current.image}
+                    alt={`${current.name} - ${current.applicationTag}`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 520px"
+                    priority
+                    className="object-cover transition-transform duration-700 ease-out hover:scale-105"
+                  />
+
+                  {/* Soft dark-to-transparent gradient edge overlay for organic depth */}
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-charcoal/60 via-transparent to-black/10" />
+                </motion.div>
+              </AnimatePresence>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* 3. Minimal Horizontal Product Rail */}
+        <div className="mt-14 md:mt-20 border-t border-charcoal/10 pt-6">
+          <div
+            role="tablist"
+            aria-label="Featured products navigation"
+            className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4"
+          >
+            {featuredProducts.map((product, index) => {
+              const isActive = index === activeIndex;
+              return (
+                <button
+                  key={product.id}
+                  type="button"
+                  role="tab"
+                  id={`spotlight-tab-${product.id}`}
+                  aria-selected={isActive}
+                  aria-controls={`spotlight-panel-${product.id}`}
+                  tabIndex={0}
+                  onClick={() => setActiveIndex(index)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setActiveIndex(index);
+                    }
+                  }}
+                  className={`group relative flex flex-col justify-center rounded-xl p-4 text-left transition-all duration-300 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-oil-gold cursor-pointer min-h-[82px] ${
+                    isActive
+                      ? "bg-white text-charcoal shadow-[0_6px_16px_-4px_rgba(26,26,26,0.08)]"
+                      : "text-charcoal-light/70 hover:bg-white/60 hover:text-charcoal"
+                  }`}
+                >
+                  {/* Active top line */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="spotlight-active-indicator"
+                      className="absolute top-0 left-4 right-4 h-0.5 bg-oil-gold"
+                      transition={{ type: "spring", stiffness: 400, damping: 32 }}
+                    />
+                  )}
+
+                  <p
+                    className={`text-sm sm:text-base font-semibold tracking-tight transition-colors leading-snug ${
+                      isActive
+                        ? "text-charcoal"
+                        : "text-charcoal/80 group-hover:text-charcoal"
+                    }`}
+                  >
+                    {product.name}
+                  </p>
+
+                  <p
+                    className={`mt-1 font-mono text-xs transition-colors ${
+                      isActive
+                        ? "text-oil-gold font-medium"
+                        : "text-oil-gold/80 group-hover:text-oil-gold"
+                    }`}
+                  >
+                    {product.applicationTag}
+                  </p>
+                </button>
+              );
+            })}
+          </div>
         </div>
       </Container>
     </section>

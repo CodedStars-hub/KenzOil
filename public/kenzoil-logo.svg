@@ -1,0 +1,51 @@
+<svg viewBox="0 0 200 200" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="logo-circle-clip">
+      <circle cx="100" cy="100" r="96" />
+    </clipPath>
+
+    <!-- Warm golden amber to fire orange gradient -->
+    <linearGradient id="orange-side" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#FBBF24" />
+      <stop offset="30%" stop-color="#F59E0B" />
+      <stop offset="80%" stop-color="#EA580C" />
+      <stop offset="100%" stop-color="#C2410C" />
+    </linearGradient>
+
+    <!-- Vibrant cyan-electric to deep royal cobalt gradient -->
+    <linearGradient id="blue-side" x1="20%" y1="20%" x2="100%" y2="80%">
+      <stop offset="0%" stop-color="#0284C7" />
+      <stop offset="35%" stop-color="#1D4ED8" />
+      <stop offset="75%" stop-color="#1E3A8A" />
+      <stop offset="100%" stop-color="#172554" />
+    </linearGradient>
+
+    <!-- Soft metallic bevel/rim -->
+    <radialGradient id="inner-depth" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.18)" />
+      <stop offset="60%" stop-color="rgba(255,255,255,0)" />
+      <stop offset="100%" stop-color="rgba(0,0,0,0.35)" />
+    </radialGradient>
+  </defs>
+
+  <g clip-path="url(#logo-circle-clip)">
+    <!-- Right blue hemisphere base -->
+    <rect x="0" y="0" width="200" height="200" fill="url(#blue-side)" />
+
+    <!-- Left orange hemisphere (bounded by vertical centerline x=100) -->
+    <path d="M 100,4 A 96,96 0 0,0 100,196 Z" fill="url(#orange-side)" />
+
+    <!-- Stylized Kenzoil "K" (Negative Space Geometry) -->
+    <!-- 1. Left Vertical Stem with Dart Point -->
+    <path d="M 72,16 L 100,16 L 100,184 L 72,184 L 72,134 L 16,100 L 72,66 Z" fill="#FFFFFF" />
+
+    <!-- 2. Right Chevron Arms -->
+    <path d="M 109,100 L 146,47 L 171,47 L 134,100 L 171,153 L 146,153 Z" fill="#FFFFFF" />
+
+    <!-- Dimensional overlay -->
+    <circle cx="100" cy="100" r="96" fill="url(#inner-depth)" pointer-events="none" />
+  </g>
+
+  <!-- Precision outer rim -->
+  <circle cx="100" cy="100" r="95.5" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
+</svg>
